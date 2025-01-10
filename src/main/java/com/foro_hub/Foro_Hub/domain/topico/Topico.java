@@ -44,6 +44,10 @@ public class Topico {
 
 
     public Topico(@Valid DatosRegistroTopico datosRegistroTopico) {
+        this.titulo = datosRegistroTopico.titulo();
+        this.mensaje = datosRegistroTopico.mensaje();
+        this.autor = datosRegistroTopico.autor();
+        this.curso = datosRegistroTopico.curso();
     }
 
     public Long getId() {
