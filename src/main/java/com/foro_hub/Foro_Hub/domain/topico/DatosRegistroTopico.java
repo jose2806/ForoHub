@@ -13,8 +13,10 @@ public record DatosRegistroTopico(
         String mensaje,
 
         @NotNull
-        Usuario autor,
+        Long autor,
 
         @NotNull
-        Curso curso
-) {}
+        Long curso
+) {
+
+}
