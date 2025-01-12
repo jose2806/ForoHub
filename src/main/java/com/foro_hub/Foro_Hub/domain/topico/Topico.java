@@ -43,11 +43,13 @@ public class Topico {
     private List<Respuesta> respuestas;
 
 
-    public Topico(@Valid DatosRegistroTopico datosRegistroTopico) {
-        this.titulo = datosRegistroTopico.titulo();
-        this.mensaje = datosRegistroTopico.mensaje();
-        this.autor = datosRegistroTopico.autor();
-        this.curso = datosRegistroTopico.curso();
+    public Topico(@Valid String titulo, String mensaje, Usuario autor, Curso curso) {
+        this.titulo = titulo;
+        this.mensaje = mensaje;
+        this.autor = autor;
+        this.curso = curso;
+        this.status = "ABIERTO";
+        this.fechaCreacion =  LocalDateTime.now();
     }
 
     public Long getId() {

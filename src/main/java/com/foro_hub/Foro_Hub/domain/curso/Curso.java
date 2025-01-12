@@ -21,6 +21,9 @@ public class Curso {
     private String nombre;
     private String categoria;
 
+    public Curso() {
+    }
+
     public Curso(@Valid DatosRegistroCurso datosRegistroCurso) {
         this.nombre = datosRegistroCurso.nombre();
         this.categoria = datosRegistroCurso.categoria();
