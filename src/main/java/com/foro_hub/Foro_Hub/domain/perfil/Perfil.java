@@ -1,6 +1,7 @@
 package com.foro_hub.Foro_Hub.domain.perfil;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,4 +20,7 @@ public class Perfil {
 
     private String nombre;
 
+    public Perfil(@NotBlank String nombre) {
+        this.nombre = nombre;
+    }
 }
