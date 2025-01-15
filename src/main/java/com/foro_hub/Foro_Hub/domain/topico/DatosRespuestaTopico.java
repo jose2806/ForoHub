@@ -14,7 +14,7 @@ public record DatosRespuestaTopico(
         LocalDateTime fechaCreacion,
         String status,
         String  autor,
-        Curso curso,
+        String  curso,
         List<Respuesta> respuestas
 ) {
 }
