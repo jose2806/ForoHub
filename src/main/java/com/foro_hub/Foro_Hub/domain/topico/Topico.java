@@ -26,7 +26,7 @@ public class Topico {
     private String mensaje;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fechaCreacion")
+    @Column(name = "fecha_creacion", nullable = false)
     private LocalDateTime fechaCreacion;
 
     private String status;
@@ -42,6 +42,8 @@ public class Topico {
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL)
     private List<Respuesta> respuestas;
 
+    public Topico() {
+    }
 
     public Topico(@Valid String titulo, String mensaje, Usuario autor, Curso curso) {
         this.titulo = titulo;

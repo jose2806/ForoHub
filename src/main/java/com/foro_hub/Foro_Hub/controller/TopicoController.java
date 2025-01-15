@@ -5,6 +5,7 @@ import com.foro_hub.Foro_Hub.domain.curso.CursoRepository;
 import com.foro_hub.Foro_Hub.domain.topico.*;
 import com.foro_hub.Foro_Hub.domain.usuario.Usuario;
 import com.foro_hub.Foro_Hub.domain.usuario.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,7 +42,7 @@ public class TopicoController {
         Topico topico = topicoRepository.save(new Topico(datosRegistroTopico.titulo(), datosRegistroTopico.mensaje(), autor, curso));
         DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(
                 topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(),
-                topico.getStatus() ,topico.getAutor().getNombre(), topico.getCurso(), topico.getRespuestas()
+                topico.getStatus() ,topico.getAutor().getNombre(), topico.getCurso().getNombre(), topico.getRespuestas()
         );
         URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaTopico);
@@ -50,5 +51,15 @@ public class TopicoController {
     @GetMapping
     public ResponseEntity<Page<DatosListadoTopico>> listarTopicos(@PageableDefault(size = 3)Pageable paginacion){
         return ResponseEntity.ok(topicoRepository.findAll(paginacion).map(DatosListadoTopico::new));
+    }
+
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DatosRespuestaTopico> retornarTopico(@PathVariable Long id){
+        Topico topico = topicoRepository.getReferenceById(id);
+        var datosTopico = new DatosRespuestaTopico(topico.getId(),
+                topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(), topico.getStatus(),
+                topico.getAutor().getNombre(), topico.getCurso().getNombre(), topico.getRespuestas());
+        return ResponseEntity.ok(datosTopico);
     }
 }
