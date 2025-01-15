@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -40,6 +41,17 @@ public class Usuario implements UserDetails {
     )
     private List<Perfil> perfiles;
 
+    public Usuario(String nombre, String correoElectronico, String contrasena) {
+        this.nombre = nombre;
+        this.correoElectronico = correoElectronico;
+        this.contrasena = contrasena;
+        this.perfiles =new ArrayList<>();
+    }
+
+
+    public Usuario() {
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -55,6 +67,10 @@ public class Usuario implements UserDetails {
 
     public String getCorreoElectronico() {
         return correoElectronico;
+    }
+
+    public List<Perfil> getPerfiles() {
+        return perfiles;
     }
 
     @Override
