@@ -1,8 +1,10 @@
 package com.foro_hub.Foro_Hub.domain.topico;
 
 import com.foro_hub.Foro_Hub.domain.curso.Curso;
+import com.foro_hub.Foro_Hub.domain.curso.CursoRepository;
 import com.foro_hub.Foro_Hub.domain.respuesta.Respuesta;
 import com.foro_hub.Foro_Hub.domain.usuario.Usuario;
+import com.foro_hub.Foro_Hub.domain.usuario.UsuarioRepository;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -84,5 +86,25 @@ public class Topico {
 
     public List<Respuesta> getRespuestas() {
         return respuestas;
+    }
+
+    public void actualizarDatos(@Valid DatosActualizarTopico datosActualizarTopico, UsuarioRepository usuarioRepository, CursoRepository cursoRepository) {
+        if(datosActualizarTopico.titulo() != null){
+            this.titulo = datosActualizarTopico.titulo();
+        }
+        if(datosActualizarTopico.mensaje() != null){
+            this.mensaje = datosActualizarTopico.mensaje();
+        }
+        if(datosActualizarTopico.status() != null){
+            this.status = datosActualizarTopico.status();
+        }
+        if(datosActualizarTopico.autor() != null){
+            this.autor = usuarioRepository.findById(datosActualizarTopico.autor()).
+                    orElseThrow(() ->new IllegalArgumentException("Usuario no encontrado"));
+        }
+        if(datosActualizarTopico.curso() != null){
+            this.curso = cursoRepository.findById(datosActualizarTopico.curso()).
+                    orElseThrow(() ->new IllegalArgumentException("Curso no encontrado"));
+        }
     }
 }

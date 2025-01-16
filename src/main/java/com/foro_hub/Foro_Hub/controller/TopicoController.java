@@ -62,4 +62,14 @@ public class TopicoController {
                 topico.getAutor().getNombre(), topico.getCurso().getNombre(), topico.getRespuestas());
         return ResponseEntity.ok(datosTopico);
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity actualizarTopico(@RequestBody @Valid DatosActualizarTopico datosActualizarTopico){
+        Topico topico = topicoRepository.getReferenceById(datosActualizarTopico.id());
+        topico.actualizarDatos(datosActualizarTopico, usuarioRepository, cursoRepository);
+        return ResponseEntity.ok(new DatosRespuestaTopico(topico.getId(), topico.getTitulo(), topico.getMensaje(),
+                topico.getFechaCreacion(), topico.getStatus(), topico.getAutor().getNombre(), topico.getCurso().getNombre(),
+                topico.getRespuestas()));
+    }
 }
