@@ -72,4 +72,13 @@ public class TopicoController {
                 topico.getFechaCreacion(), topico.getStatus(), topico.getAutor().getNombre(), topico.getCurso().getNombre(),
                 topico.getRespuestas()));
     }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity eliminarTopico(@PathVariable Long id){
+        Topico topico = topicoRepository.getReferenceById(id);
+        topicoRepository.delete(topico);
+        return ResponseEntity.noContent().build();
+    }
 }
