@@ -3,8 +3,10 @@ package com.foro_hub.Foro_Hub.controller;
 import com.foro_hub.Foro_Hub.domain.perfil.Perfil;
 import com.foro_hub.Foro_Hub.domain.perfil.PerfilRepository;
 import com.foro_hub.Foro_Hub.domain.topico.DatosListadoTopico;
+import com.foro_hub.Foro_Hub.domain.topico.Topico;
 import com.foro_hub.Foro_Hub.domain.usuario.*;
 import com.foro_hub.Foro_Hub.infra.security.SecurityConfigurations;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,4 +47,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioRepository.findAll(paginacion).map(DatosListadoUsuario::new));
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity eliminarUsuario(@PathVariable Long id){
+        Usuario usuario = usuarioRepository.getReferenceById(id);
+        usuarioRepository.delete(usuario);
+        return ResponseEntity.noContent().build();
+    }
 }
