@@ -3,10 +3,7 @@ package com.foro_hub.Foro_Hub.controller;
 import com.foro_hub.Foro_Hub.domain.perfil.Perfil;
 import com.foro_hub.Foro_Hub.domain.perfil.PerfilRepository;
 import com.foro_hub.Foro_Hub.domain.topico.DatosListadoTopico;
-import com.foro_hub.Foro_Hub.domain.usuario.DatosRegistroUsuario;
-import com.foro_hub.Foro_Hub.domain.usuario.DatosRespuestaUsuario;
-import com.foro_hub.Foro_Hub.domain.usuario.Usuario;
-import com.foro_hub.Foro_Hub.domain.usuario.UsuarioRepository;
+import com.foro_hub.Foro_Hub.domain.usuario.*;
 import com.foro_hub.Foro_Hub.infra.security.SecurityConfigurations;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +40,9 @@ public class UsuarioController {
         return ResponseEntity.created(url).body(datosRespuestaUsuario);
     }
 
-
+    @GetMapping
+    public ResponseEntity<Page<DatosListadoUsuario>> listarUsuarios(@PageableDefault(size = 3)Pageable paginacion){
+        return ResponseEntity.ok(usuarioRepository.findAll(paginacion).map(DatosListadoUsuario::new));
+    }
 
 }

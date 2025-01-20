@@ -23,4 +23,15 @@ public class Perfil {
     public Perfil(@NotBlank String nombre) {
         this.nombre = nombre;
     }
+
+    public Perfil() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
