@@ -17,4 +17,5 @@ public record DatosRespuestaTopico(
         String  curso,
         List<Respuesta> respuestas
 ) {
+
 }

@@ -3,6 +3,7 @@ package com.foro_hub.Foro_Hub.domain.respuesta;
 import com.foro_hub.Foro_Hub.domain.topico.Topico;
 import com.foro_hub.Foro_Hub.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,4 +37,40 @@ public class Respuesta {
     private Topico topico;
 
     private Boolean solucion;
+
+
+    public Respuesta() {
+    }
+
+    public Respuesta( String mensaje, LocalDateTime fecha, Usuario autor, Topico topico, boolean solucion) {
+        this.mensaje = mensaje;
+        this.fechaCreacion = fecha;
+        this.autor = autor;
+        this.topico = topico;
+        this.solucion = solucion;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public Usuario getAutor() {
+        return autor;
+    }
+
+    public Topico getTopico() {
+        return topico;
+    }
+
+    public Boolean getSolucion() {
+        return solucion;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
