@@ -57,7 +57,7 @@ public class TopicoController {
     @Transactional
     public ResponseEntity<DatosRespuestaTopico> retornarTopico(@PathVariable Long id){
         Topico topico = topicoRepository.getReferenceById(id);
-        var datosTopico = new DatosRespuestaTopico(topico.getId(),
+        DatosRespuestaTopico datosTopico = new DatosRespuestaTopico(topico.getId(),
                 topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(), topico.getStatus(),
                 topico.getAutor().getNombre(), topico.getCurso().getNombre(), topico.getRespuestas());
         return ResponseEntity.ok(datosTopico);

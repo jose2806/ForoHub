@@ -1,6 +1,7 @@
 package com.foro_hub.Foro_Hub.domain.topico;
 
 import com.foro_hub.Foro_Hub.domain.curso.Curso;
+import com.foro_hub.Foro_Hub.domain.respuesta.DatosListadoRespuesta;
 import com.foro_hub.Foro_Hub.domain.respuesta.Respuesta;
 import com.foro_hub.Foro_Hub.domain.usuario.Usuario;
 
@@ -15,10 +16,11 @@ public record DatosListadoTopico(
         String status,
         String autor,
         String curso,
-        List<Respuesta> respuestas
+        List<DatosListadoRespuesta> respuestas
 ) {
     public DatosListadoTopico(Topico topico){
         this(topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getFechaCreacion(),
-                topico.getStatus(), topico.getAutor().getNombre(),topico.getCurso().getNombre(),topico.getRespuestas());
+                topico.getStatus(), topico.getAutor().getNombre(),topico.getCurso().getNombre(),
+                topico.getRespuestas().stream().map(DatosListadoRespuesta::new).toList());
     }
 }
